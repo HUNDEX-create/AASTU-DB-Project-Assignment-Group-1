@@ -1,1 +1,58 @@
-PDF placeholder
+# Sample Hospital Forms (Data Mapping)
+
+This document describes the physical paper forms used to model the HMS Database.
+
+## Form A: Patient Registration & Intake
+*Mapped to: `Patient` table and `Patients` MongoDB collection*
+
+**Fields:**
+- Full Name
+- Date of Birth (Used for age-based analytics)
+- Gender (M/F)
+- Phone Number (Used as a secondary unique identifier)
+- Blood Group (Critical for the `Appointment` priority logic)
+- Emergency Contact Name & Phone
+
+## Form B: Doctor's Consultation Note
+*Mapped to: `Medical_Record` table and `MedicalRecords` MongoDB collection*
+
+**Fields:**
+- Date/Time of Consultation
+- Main Symptoms
+- Diagnosis (Text field)
+- Treatment Plan (Normalized to include Medication and Dosage)
+- Follow-up recommendation
+
+## Form C: Billing Invoice & Receipt
+*Mapped to: `Billing` and `Payment` tables*
+
+**Fields:**
+- Bill Number (Maps to `bill_id`)
+- Consultation Fee
+- Medication Fee
+- Total Amount Due
+- Payment Method Selection (Telebirr, CBE, Cash, etc.)
+- Transaction Date
+
+## Form D: Emergency Triage & Intake
+*Mapped to: `Appointment` and `Medical_Record` tables (Emergency status)*
+
+**Fields:**
+- Arrival Mode (Ambulance/Walk-in)
+- Trauma/Non-Trauma Selection
+- Immediate Vital Signs (Pulse, SpO2, Responsiveness)
+- Triage Level (Level 1 - Resuscitation to Level 5 - Non-urgent)
+- Preliminary Diagnosis by Triage Nurse
+
+## Form E: Pharmacy Dispensing / Prescription Form
+*Mapped to: `Medical_Record` details and NoSQL `prescriptions` array*
+
+**Fields:**
+- Prescription ID
+- Patient ID & Name
+- Prescribing Doctor
+- Medication Name & Concentration
+- Dosage Instructions (e.g., QID, BID, PRN)
+- Quantity Dispensed
+- Date of Fulfillment
+
